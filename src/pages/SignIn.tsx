@@ -7,8 +7,11 @@ import {
   Text,
   TextField,
 } from "@radix-ui/themes";
+import { useNavigate } from "react-router-dom";
 
 const SignIn = () => {
+  const navigate = useNavigate();
+
   return (
     <Container>
       <Heading as="h1" size="8" align="center">
@@ -33,7 +36,11 @@ const SignIn = () => {
 
         <Text as="p">Ainda não tem acesso?</Text>
 
-        <Button variant="outline" style={{ width: "200px" }}>
+        <Button
+          variant="outline"
+          style={{ width: "200px" }}
+          onClick={() => navigate("/signup")}
+        >
           Criar conta
         </Button>
       </Flex>

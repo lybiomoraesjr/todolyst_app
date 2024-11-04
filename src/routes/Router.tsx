@@ -3,7 +3,7 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import TodoList from "../pages/TodoList";
 
-const user = true;
+const user = false;
 
 const PrivateRoute = () => {
   return user ? <Outlet /> : <Navigate to="/" />;
