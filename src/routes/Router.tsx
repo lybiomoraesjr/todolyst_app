@@ -6,7 +6,7 @@ import TodoList from "../pages/TodoList";
 const user = false;
 
 const PrivateRoute = () => {
-  return user ? <Outlet /> : <Navigate to="/" />;
+  return !user ? <Outlet /> : <Navigate to="/" />;
 };
 
 const PublicRoute = () => {
