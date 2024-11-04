@@ -1,16 +1,35 @@
-import {
-  Box,
-  Button,
-  Container,
-  Flex,
-  Heading,
-  Text,
-  TextField,
-} from "@radix-ui/themes";
+import { Button, Container, Flex, Heading, Text } from "@radix-ui/themes";
+import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import Input from "../components/Input";
+
+type FormDataProps = {
+  email: string;
+  password: string;
+};
+
+const signInSchema = yup.object({
+  email: yup.string().required("Informe o e-mail").email("E-mail inválido."),
+  password: yup
+    .string()
+    .required("Informe a senha")
+    .min(6, "A senha deve ter pelo menos 6 dígitos."),
+});
 
 const SignIn = () => {
   const navigate = useNavigate();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormDataProps>({
+    resolver: yupResolver(signInSchema),
+  });
+
+  const handleSignIn = async () => {};
 
   return (
     <Container>
@@ -22,15 +41,38 @@ const SignIn = () => {
         <Heading as="h2" size="4" align="center">
           Acesse a conta
         </Heading>
-        <Box width="200px">
-          <TextField.Root size="1" placeholder="E-mail" />
-        </Box>
 
-        <Box width="200px">
-          <TextField.Root size="1" placeholder="Senha" />
-        </Box>
+        <Controller
+          control={control}
+          name="email"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="E-mail"
+              errorMessage={errors.email?.message}
+              value={value}
+              onChange={onChange}
+            />
+          )}
+        />
 
-        <Button variant="solid" style={{ width: "200px" }}>
+        <Controller
+          control={control}
+          name="password"
+          render={({ field: { onChange, value } }) => (
+            <Input
+              placeholder="Senha"
+              errorMessage={errors.password?.message}
+              value={value}
+              onChange={onChange}
+            />
+          )}
+        />
+
+        <Button
+          variant="solid"
+          style={{ width: "200px" }}
+          onClick={handleSubmit(handleSignIn)}
+        >
           Acessar
         </Button>
 
