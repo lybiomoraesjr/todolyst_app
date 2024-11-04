@@ -1,16 +1,42 @@
-import React from "react";
-import { Button, Container } from "@radix-ui/themes";
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  Heading,
+  Text,
+  TextField,
+} from "@radix-ui/themes";
 
 const SignIn = () => {
   return (
-    <Container size="1">
-      <Button variant="solid">
-        Acessar
-      </Button>
+    <Container>
+      <Heading as="h1" size="8" align="center">
+        To-do Lyst
+      </Heading>
 
-      <Button variant="outline">
-        Criar Conta
-      </Button>
+      <Flex direction="column" gap="2" align="center" justify="center">
+        <Heading as="h2" size="4" align="center">
+          Acesse a conta
+        </Heading>
+        <Box width="200px">
+          <TextField.Root size="1" placeholder="E-mail" />
+        </Box>
+
+        <Box width="200px">
+          <TextField.Root size="1" placeholder="Senha" />
+        </Box>
+
+        <Button variant="solid" style={{ width: "200px" }}>
+          Acessar
+        </Button>
+
+        <Text as="p">Ainda não tem acesso?</Text>
+
+        <Button variant="outline" style={{ width: "200px" }}>
+          Criar conta
+        </Button>
+      </Flex>
     </Container>
   );
 };

@@ -1,10 +1,13 @@
 import { Theme, ThemePanel } from "@radix-ui/themes";
-import SignIn from "./pages/SignIn";
+import { BrowserRouter } from "react-router-dom";
+import Router from "./routes/Router";
 
 const App = () => {
   return (
-    <Theme>
-      <SignIn />
+    <Theme accentColor="blue" grayColor="sand" radius="small" scaling="100%">
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
       <ThemePanel />
     </Theme>
   );
