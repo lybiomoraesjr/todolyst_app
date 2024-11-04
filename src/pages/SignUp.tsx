@@ -55,6 +55,7 @@ const SignUn = () => {
           name="name"
           render={({ field: { onChange, value } }) => (
             <Input
+              label="Nome"
               placeholder="Nome"
               errorMessage={errors.name?.message}
               value={value}
@@ -68,6 +69,7 @@ const SignUn = () => {
           name="email"
           render={({ field: { onChange, value } }) => (
             <Input
+              label="E-mail"
               placeholder="E-mail"
               errorMessage={errors.email?.message}
               value={value}
@@ -81,6 +83,7 @@ const SignUn = () => {
           name="password"
           render={({ field: { onChange, value } }) => (
             <Input
+              label="Senha"
               placeholder="Senha"
               errorMessage={errors.password?.message}
               value={value}
@@ -94,7 +97,7 @@ const SignUn = () => {
           name="password_confirm"
           render={({ field: { onChange, value } }) => (
             <Input
-              name="password_confirm"
+              label="Confirme a Senha"
               placeholder="Confirme a Senha"
               errorMessage={errors.password_confirm?.message}
               value={value}
