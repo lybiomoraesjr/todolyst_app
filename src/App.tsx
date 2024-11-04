@@ -1,7 +1,13 @@
-import "./App.css";
+import { Theme, ThemePanel } from "@radix-ui/themes";
+import SignIn from "./pages/SignIn";
 
-function App() {
-  return <div>haoba</div>;
-}
+const App = () => {
+  return (
+    <Theme>
+      <SignIn />
+      <ThemePanel />
+    </Theme>
+  );
+};
 
 export default App;
