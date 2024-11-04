@@ -1,9 +1,10 @@
-import { Button, Container, Flex, Heading, Text } from "@radix-ui/themes";
+import { Container, Flex, Heading, Text } from "@radix-ui/themes";
 import { Controller, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Input from "../components/Input";
+import Button from "../components/Button";
 
 type FormDataProps = {
   email: string;
@@ -68,23 +69,15 @@ const SignIn = () => {
           )}
         />
 
-        <Button
-          variant="solid"
-          style={{ width: "200px" }}
-          onClick={handleSubmit(handleSignIn)}
-        >
-          Acessar
-        </Button>
+        <Button title="Acessar" onClick={handleSubmit(handleSignIn)} />
 
         <Text as="p">Ainda não tem acesso?</Text>
 
         <Button
+          title="Criar conta"
           variant="outline"
-          style={{ width: "200px" }}
           onClick={() => navigate("/signup")}
-        >
-          Criar conta
-        </Button>
+        />
       </Flex>
     </Container>
   );

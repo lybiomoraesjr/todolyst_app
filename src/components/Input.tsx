@@ -1,5 +1,5 @@
 import { Box, Text, TextField } from "@radix-ui/themes";
-import { ComponentProps } from "react";
+import React, { ComponentProps } from "react";
 
 type InputProps = {
     placeholder: string;
