@@ -3,4 +3,6 @@ export type TaskDTO = {
   title: string;
   priority: string;
   status: string;
+  startDate: Date;
+  endDate: Date;
 };

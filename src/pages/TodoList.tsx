@@ -1,38 +1,57 @@
-import { Button, Container } from "@radix-ui/themes";
+import { Button, Container, Flex, Tabs, TextField } from "@radix-ui/themes";
 import Header from "../components/Header";
 import TaskDialog from "../components/TaskDialog";
-import { PlusIcon } from "@radix-ui/react-icons";
-import Select from "../components/Select";
+import { MagnifyingGlassIcon, PlusIcon } from "@radix-ui/react-icons";
 import TaskCard from "../components/TaskCard";
+import { useTask } from "../hooks/useTask";
 
 const TodoList = () => {
+  const { tasks } = useTask();
+
   return (
     <Container>
-      <Header />
+      <Header name="Lybio" />
 
-      <TaskDialog
-        title="Criar Tarefa"
-        description="Preencha os detalhes para criar uma nova tarefa"
-        button={
-          <Button>
-            <PlusIcon /> Adicionar
-          </Button>
-        }
-        onInteraction={async (taskId) => {}}
-      />
+      <Flex justify="between" align="end" wrap="wrap" gap="5">
+        <TextField.Root
+          placeholder="Search the docs…"
+          style={{ minWidth: "150px", flex: "1" }}
+        >
+          <TextField.Slot>
+            <MagnifyingGlassIcon height="16" width="16" />
+          </TextField.Slot>
+        </TextField.Root>
 
-      <Select
-        label="Filtrar por"
-        options={[
-          { value: "all", label: "Todas as tarefas" },
-          { value: "pending", label: "Tarefas pendentes" },
-          { value: "completed", label: "Tarefas completadas" },
-          { value: "priority", label: "Tarefas  por prioridade" },
-        ]}
-        onChange={(value) => {}}
-      />
+        <Tabs.Root defaultValue="all" style={{ flex: "1" }}>
+          <Tabs.List>
+            <Tabs.Trigger value="all">Todas</Tabs.Trigger>
+            <Tabs.Trigger value="priority">Prioridade</Tabs.Trigger>
+            <Tabs.Trigger value="upcoming">Próximas</Tabs.Trigger>
+            <Tabs.Trigger value="completed">Concluídas</Tabs.Trigger>
+          </Tabs.List>
+        </Tabs.Root>
 
-      <TaskCard />
+        <TaskDialog
+          title="Criar Tarefa"
+          description="Preencha os detalhes para criar uma nova tarefa"
+          button={
+            <Button>
+              <PlusIcon /> Adicionar
+            </Button>
+          }
+          onInteraction={async (taskId) => {}}
+        />
+      </Flex>
+
+      {tasks.map((task) => (
+        <TaskCard
+          key={task.id}
+          title={task.title}
+          startDate={task.startDate}
+          endDate={task.endDate}
+          priority={task.priority}
+        />
+      ))}
     </Container>
   );
 };
