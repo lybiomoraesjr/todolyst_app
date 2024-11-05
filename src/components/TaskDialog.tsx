@@ -5,6 +5,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
 import { ReactNode, useState } from "react";
+import { toast } from "react-toastify";
 
 type FormDataProps = {
   title: string;
@@ -57,8 +58,10 @@ const TaskDialog: React.FC<TaskDialogProps> = ({
       await onInteraction(data);
       handleResetForm();
       setIsOpen(false);
+      toast.success("Sucesso!");
     } catch (error) {
-      setIsLoading(false);
+      toast.error("Erro!");
+
       throw error;
     } finally {
       setIsLoading(false);
