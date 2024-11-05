@@ -16,6 +16,7 @@ const TodoList = () => {
             <PlusIcon /> Adicionar
           </Button>
         }
+        onInteraction={async (taskId) => {}}
       />
     </Container>
   );

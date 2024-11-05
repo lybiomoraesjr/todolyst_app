@@ -1,11 +1,10 @@
-import { PlusIcon } from "@radix-ui/react-icons";
 import { Button, Dialog, Flex } from "@radix-ui/themes";
 import Input from "./Input";
 import Select from "./Select";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Controller, useForm } from "react-hook-form";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 type FormDataProps = {
   title: string;
@@ -28,6 +27,7 @@ type TaskDialogProps = {
   title: string;
   description: string;
   button: ReactNode;
+  onInteraction: (taskId: string) => Promise<void>;
 };
 
 const TaskDialog: React.FC<TaskDialogProps> = ({
@@ -35,6 +35,8 @@ const TaskDialog: React.FC<TaskDialogProps> = ({
   description,
   button,
 }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const {
     control,
     handleSubmit,
@@ -43,8 +45,18 @@ const TaskDialog: React.FC<TaskDialogProps> = ({
     resolver: yupResolver(taskDialogSchema),
   });
 
-  const handleSaveTask = (data: FormDataProps) => {
-    console.log(data);
+  const handleSaveTask = async (data: FormDataProps) => {
+    try {
+      setIsLoading(true);
+      
+
+   
+    } catch (error) {
+      setIsLoading(false);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -130,12 +142,12 @@ const TaskDialog: React.FC<TaskDialogProps> = ({
 
         <Flex gap="3" mt="4" justify="end">
           <Dialog.Close>
-            <Button variant="soft" color="gray">
-              Cancel
+            <Button variant="soft" color="gray" disabled={isLoading}>
+              Cancelar
             </Button>
           </Dialog.Close>
           <Dialog.Close onClick={handleSubmit(handleSaveTask)}>
-            <Button>Save</Button>
+            <Button loading={isLoading} disabled={isLoading}>Salvar</Button>
           </Dialog.Close>
         </Flex>
       </Dialog.Content>
