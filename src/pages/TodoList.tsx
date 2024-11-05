@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import TaskDialog from "../components/TaskDialog";
 import { PlusIcon } from "@radix-ui/react-icons";
 import Select from "../components/Select";
+import TaskCard from "../components/TaskCard";
 
 const TodoList = () => {
   return (
@@ -26,9 +27,12 @@ const TodoList = () => {
           { value: "all", label: "Todas as tarefas" },
           { value: "pending", label: "Tarefas pendentes" },
           { value: "completed", label: "Tarefas completadas" },
+          { value: "priority", label: "Tarefas  por prioridade" },
         ]}
         onChange={(value) => {}}
       />
+
+      <TaskCard />
     </Container>
   );
 };

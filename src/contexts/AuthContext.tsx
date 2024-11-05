@@ -30,17 +30,16 @@ export const AuthContextProvider = ({ children }: AuthContextProviderProps) => {
     } catch (error) {
       throw error;
     }
-
-    return (
-      <AuthContext.Provider
-        value={{
-          user,
-          signIn,
-          signOut,
-        }}
-      >
-        {children}
-      </AuthContext.Provider>
-    );
   };
+  return (
+    <AuthContext.Provider
+      value={{
+        user,
+        signIn,
+        signOut,
+      }}
+    >
+      {children}
+    </AuthContext.Provider>
+  );
 };
