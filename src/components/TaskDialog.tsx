@@ -55,6 +55,7 @@ const TaskDialog: React.FC<TaskDialogProps> = ({
     try {
       setIsLoading(true);
       await onInteraction(data);
+      handleResetForm();
       setIsOpen(false);
     } catch (error) {
       setIsLoading(false);
