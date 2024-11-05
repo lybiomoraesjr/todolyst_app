@@ -2,11 +2,12 @@ import { Route, Routes, Navigate, Outlet } from "react-router-dom";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import TodoList from "../pages/TodoList";
+import NotFound from "../pages/NotFound";
 
 const user = false;
 
 const PrivateRoute = () => {
-  return !user ? <Outlet /> : <Navigate to="/" />;
+  return user ? <Outlet /> : <Navigate to="/" />;
 };
 
 const PublicRoute = () => {
@@ -24,6 +25,8 @@ const Router = () => {
       <Route element={<PrivateRoute />}>
         <Route path="/todo" element={<TodoList />} />
       </Route>
+
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
