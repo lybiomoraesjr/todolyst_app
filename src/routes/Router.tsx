@@ -7,7 +7,7 @@ import NotFound from "../pages/NotFound";
 const user = false;
 
 const PrivateRoute = () => {
-  return user ? <Outlet /> : <Navigate to="/" />;
+  return !user ? <Outlet /> : <Navigate to="/" />;
 };
 
 const PublicRoute = () => {

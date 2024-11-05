@@ -2,13 +2,14 @@ import { Container, Flex, Heading, Text } from "@radix-ui/themes";
 import React from "react";
 import Button from "./Button";
 import { useAuth } from "../hooks/useAuth";
+import ConfirmationDialog from "./ConfirmationDialog";
 
 const Header: React.FC = () => {
   const { user, signOut } = useAuth();
 
   return (
-    <Container>
-      <Flex align="center" justify="between" style={{ padding: "1rem 0" }}>
+    <Container style={{ backgroundColor: "#f0f0f0", width: "100%" }}>
+      <Flex align="center" justify="between">
         <Heading as="h1" size="6" align="center">
           To-do Lyst
         </Heading>
@@ -17,7 +18,10 @@ const Header: React.FC = () => {
           Olá, Lybio
         </Text>
 
-        <Button title="sair" variant="solid" onClick={signOut} />
+        <ConfirmationDialog
+          onConfirm={signOut}
+          button={<Button title="sair" variant="solid" />}
+        />
       </Flex>
     </Container>
   );

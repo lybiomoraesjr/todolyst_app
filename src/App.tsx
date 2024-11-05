@@ -24,7 +24,7 @@ const App = () => {
         pauseOnHover
         theme="light"
       />
-      {/* <ThemePanel /> */}
+      <ThemePanel />
     </Theme>
   );
 };
