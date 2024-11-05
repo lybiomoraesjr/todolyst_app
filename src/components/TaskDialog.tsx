@@ -27,30 +27,35 @@ type TaskDialogProps = {
   title: string;
   description: string;
   button: ReactNode;
-  onInteraction: (taskId: string) => Promise<void>;
+  onInteraction: (task: FormDataProps) => Promise<void>;
+  initialTask?: FormDataProps;
 };
 
 const TaskDialog: React.FC<TaskDialogProps> = ({
   title,
   description,
   button,
+  onInteraction,
+  initialTask,
 }) => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormDataProps>({
+    defaultValues: initialTask || {},
     resolver: yupResolver(taskDialogSchema),
   });
 
   const handleSaveTask = async (data: FormDataProps) => {
     try {
       setIsLoading(true);
-      
-
-   
+      await onInteraction(data);
+      setIsOpen(false);
     } catch (error) {
       setIsLoading(false);
       throw error;
@@ -59,8 +64,17 @@ const TaskDialog: React.FC<TaskDialogProps> = ({
     }
   };
 
+  const handleResetForm = (): void => {
+    reset({
+      title: "",
+      priority: "",
+      startDate: "",
+      endDate: "",
+    });
+  };
+
   return (
-    <Dialog.Root>
+    <Dialog.Root open={isOpen} onOpenChange={setIsOpen}>
       <Dialog.Trigger>{button}</Dialog.Trigger>
 
       <Dialog.Content maxWidth="450px">
@@ -142,12 +156,19 @@ const TaskDialog: React.FC<TaskDialogProps> = ({
 
         <Flex gap="3" mt="4" justify="end">
           <Dialog.Close>
-            <Button variant="soft" color="gray" disabled={isLoading}>
+            <Button
+              variant="soft"
+              color="gray"
+              disabled={isLoading}
+              onClick={handleResetForm}
+            >
               Cancelar
             </Button>
           </Dialog.Close>
           <Dialog.Close onClick={handleSubmit(handleSaveTask)}>
-            <Button loading={isLoading} disabled={isLoading}>Salvar</Button>
+            <Button loading={isLoading} disabled={isLoading}>
+              Salvar
+            </Button>
           </Dialog.Close>
         </Flex>
       </Dialog.Content>
