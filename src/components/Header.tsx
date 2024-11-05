@@ -20,7 +20,7 @@ const Header: React.FC = () => {
 
         <ConfirmationDialog
           onConfirm={signOut}
-          button={<Button title="sair" variant="solid" />}
+          button={<Button title="Sair" variant="solid" />}
         />
       </Flex>
     </Container>

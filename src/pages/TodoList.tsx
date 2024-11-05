@@ -2,6 +2,7 @@ import { Button, Container } from "@radix-ui/themes";
 import Header from "../components/Header";
 import TaskDialog from "../components/TaskDialog";
 import { PlusIcon } from "@radix-ui/react-icons";
+import Select from "../components/Select";
 
 const TodoList = () => {
   return (
@@ -17,6 +18,16 @@ const TodoList = () => {
           </Button>
         }
         onInteraction={async (taskId) => {}}
+      />
+
+      <Select
+        label="Filtrar por"
+        options={[
+          { value: "all", label: "Todas as tarefas" },
+          { value: "pending", label: "Tarefas pendentes" },
+          { value: "completed", label: "Tarefas completadas" },
+        ]}
+        onChange={(value) => {}}
       />
     </Container>
   );

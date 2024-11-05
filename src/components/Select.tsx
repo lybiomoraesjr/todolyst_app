@@ -7,6 +7,7 @@ type SelectProps = {
   options: { value: string; label: string }[];
   onChange?: (value: string) => void;
   value?: string;
+  placeholder?: string;
 } & ComponentProps<typeof RadixSelect.Root>;
 
 const Select: React.FC<SelectProps> = ({
@@ -15,6 +16,7 @@ const Select: React.FC<SelectProps> = ({
   onChange,
   value,
   errorMessage,
+  placeholder = "Selecione uma opção",
   ...rest
 }) => {
   return (
@@ -26,7 +28,7 @@ const Select: React.FC<SelectProps> = ({
       )}
 
       <RadixSelect.Root value={value} onValueChange={onChange} {...rest}>
-        <RadixSelect.Trigger />
+        <RadixSelect.Trigger placeholder={placeholder} />
         <RadixSelect.Content position="popper">
           {options.map((option) => (
             <RadixSelect.Item value={option.value}>
